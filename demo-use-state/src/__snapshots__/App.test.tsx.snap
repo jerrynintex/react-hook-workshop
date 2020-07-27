@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders expect html 1`] = `
+<div
+  className="App"
+>
+  <h1>
+    Demo for state lazy initialization 
+  </h1>
+  <div
+    className="card-container"
+  >
+    <div
+      className="MuiPaper-root MuiCard-root card MuiPaper-outlined MuiPaper-rounded"
+    >
+      <div
+        className="MuiCardContent-root"
+      >
+        <h3>
+          2 * 2 * 2 * 2 * 2 * 5 * 5 * 5 * 5 * 5
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div
+    className="divider"
+  />
+  <div>
+    <input
+      onChange={[Function]}
+      type="number"
+    />
+  </div>
+</div>
+`;
