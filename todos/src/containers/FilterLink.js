@@ -1,18 +1,28 @@
 import { setVisibilityFilter } from '../actions'
 import Link from '../components/Link'
+import connect from '../connect.'
 import { Store } from '../todoContext'
-import React, { useContext } from 'react'
+import React from 'react'
 
 const FilterLink = (props) => {
-  const { state, dispatch } = useContext(Store);
   console.log('Render FilterLink');
   return (
     <Link 
-      active={props.filter === state.visibilityFilter}
-      onClick={() => dispatch(setVisibilityFilter(props.filter))}
       {...props}
     />
   );
 }
 
-export default FilterLink;
+const mapStateToProps = (state, ownProps) => ({
+  active: ownProps.filter === state.visibilityFilter
+})
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onClick: () => dispatch(setVisibilityFilter(ownProps.filter))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  Store
+)(FilterLink)

@@ -1,10 +1,10 @@
-import React, { useContext, useRef } from 'react'
+import React, { useRef } from 'react'
 import { addTodo } from '../actions'
+import connect from '../connect.'
 import { Store } from '../todoContext'
 
-const AddTodo = () => {
+const AddTodo = (props) => {
   const inputRef = useRef();
-  const { dispatch } = useContext(Store);
   console.log('Render AddTodo');
 
   return (
@@ -14,7 +14,7 @@ const AddTodo = () => {
         if (!inputRef.current.value.trim()) {
           return
         }
-        dispatch(addTodo(inputRef.current.value))
+        props.addTodo(inputRef.current.value);
         inputRef.current.value = '';
       }}>
         <input ref={inputRef} />
@@ -26,4 +26,12 @@ const AddTodo = () => {
   )
 }
 
-export default AddTodo;
+const mapDispatchToProps = dispatch => ({
+  addTodo: text => dispatch(addTodo(text))
+})
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  Store
+)(AddTodo);
