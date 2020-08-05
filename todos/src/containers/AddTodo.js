@@ -1,21 +1,23 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useContext, useRef } from 'react'
 import { addTodo } from '../actions'
+import { Store } from '../todoContext'
 
-const AddTodo = ({ dispatch }) => {
-  let input
+const AddTodo = () => {
+  const inputRef = useRef();
+  const { dispatch } = useContext(Store);
+  console.log('Render AddTodo');
 
   return (
     <div>
       <form onSubmit={e => {
         e.preventDefault()
-        if (!input.value.trim()) {
+        if (!inputRef.current.value.trim()) {
           return
         }
-        dispatch(addTodo(input.value))
-        input.value = ''
+        dispatch(addTodo(inputRef.current.value))
+        inputRef.current.value = '';
       }}>
-        <input ref={node => input = node} />
+        <input ref={inputRef} />
         <button type="submit">
           Add Todo
         </button>
@@ -24,4 +26,4 @@ const AddTodo = ({ dispatch }) => {
   )
 }
 
-export default connect()(AddTodo)
+export default AddTodo;
