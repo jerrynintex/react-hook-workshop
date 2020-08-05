@@ -1,10 +1,10 @@
-import React, { useContext, useRef } from 'react'
+import React, { useRef } from 'react'
 import { addTodo } from '../actions'
-import { Store } from '../todoContext'
+import { useTodoDispatch } from '../todoContext'
 
 const AddTodo = () => {
   const inputRef = useRef();
-  const { dispatch } = useContext(Store);
+  const dispatch = useTodoDispatch();
   console.log('Render AddTodo');
 
   return (

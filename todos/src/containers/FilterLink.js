@@ -1,14 +1,17 @@
+import React from 'react'
 import { setVisibilityFilter } from '../actions'
 import Link from '../components/Link'
-import { Store } from '../todoContext'
-import React, { useContext } from 'react'
+import { useTodoSelector, useTodoDispatch } from '../todoContext'
+
 
 const FilterLink = (props) => {
-  const { state, dispatch } = useContext(Store);
+  const active = useTodoSelector(state => props.filter === state.visibilityFilter);
+  const dispatch = useTodoDispatch()
   console.log('Render FilterLink');
+
   return (
     <Link 
-      active={props.filter === state.visibilityFilter}
+      active={active}
       onClick={() => dispatch(setVisibilityFilter(props.filter))}
       {...props}
     />

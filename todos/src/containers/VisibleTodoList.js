@@ -1,8 +1,8 @@
+import React from 'react'
+import { useTodoSelector, useTodoDispatch } from '../todoContext'
 import { toggleTodo } from '../actions'
 import TodoList from '../components/TodoList'
 import { VisibilityFilters } from '../actions'
-import { Store } from '../todoContext'
-import React, { useContext } from 'react'
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
@@ -17,11 +17,16 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 const VisibleTodoList = (props) => {
-  const { state, dispatch } = useContext(Store);
+
+  const todos = useTodoSelector(state => state.todos);
+  const visibilityFilter = useTodoSelector(state => state.visibilityFilter);
+  const dispatch = useTodoDispatch()
+
   console.log('Render VisibleTodoList');
+
   return (
     <TodoList
-      todos={getVisibleTodos(state.todos, state.visibilityFilter)}
+      todos={getVisibleTodos(todos, visibilityFilter)}
       toggleTodo={id => dispatch(toggleTodo(id))}
       {...props}
     />
